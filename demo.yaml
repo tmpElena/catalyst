@@ -1,0 +1,12 @@
+extract:
+  connector: postgres
+
+transform:
+  getBestSongs:
+    getAllSongs: select * from artist
+    getBest: where rating > 8
+
+load:
+  getBestSongs:
+    format: csv
+    fileName: result

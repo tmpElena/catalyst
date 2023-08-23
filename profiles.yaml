@@ -1,0 +1,4 @@
+postgres:
+  username: postgres
+  database: music
+  password: postgres
