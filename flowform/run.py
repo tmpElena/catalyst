@@ -1,6 +1,5 @@
 import yaml
 import psycopg2
-import sys
 
 
 def extract(userProfile):
@@ -38,24 +37,20 @@ def load(connection, resQueries, userFile):
             cursor.copy_expert(copySql, file)
 
 
-def getUserFile():
-    N = len(sys.argv)
-    if N != 2:
-        raise SyntaxError
-
-    with open(sys.argv[1], 'r') as file:
+def getUserFile(userFileName):
+    with open(userFileName, 'r') as file:
         userFile = yaml.safe_load(file)
     return userFile
 
 
 def getUserProfile():
-    with open('profiles.yaml', 'r') as file:
+    with open('profiles/profiles.yaml', 'r') as file:
         userProfile = yaml.safe_load(file)
     return userProfile
 
 
-if __name__ == '__main__':
-    UserFile = getUserFile()
+def runCommand(userFileName):
+    UserFile = getUserFile(userFileName)
     UserProfile = getUserProfile()
 
     connection = extract(UserProfile)
